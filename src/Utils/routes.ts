@@ -1,0 +1,19 @@
+export const ROUTES = {
+    HOME:"/perfume",
+    REGISTRATION:"/registration",
+    BASKET:"/basket",
+    BONUSES:"/bonuses",
+    DOCUMENTATION:"/documentation",
+    ABOUTUS:"/aboutus",
+    MANCATALOGPAGE:"/mancatalogpage",
+    WOMENCATALOGPAGE:"/womencatalogpage",
+    UNISEX:"/unisexcatalogpage",
+    SINGLEPRODUCT:"/singleproduct/",
+    USERPAGE:"/userpage",
+    BONUSESPANEL:"/bonusespanel",
+    ORDERPANEL:"/orderpanel",
+    DOWNLOADSPANEL:"/downloadspanel",
+    LOCATIONPANEL:"/locationpanel",
+    USERPANEL:"/userpanel",
+    NOTFOUNDPAGE:"/*"
+};
