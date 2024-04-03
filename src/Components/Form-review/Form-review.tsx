@@ -22,9 +22,7 @@ export const FormReview:React.FC<IFormReview> = (id) => {
    
   const send = (event : any) => {
     event.preventDefault();
-    setTimeout(() => {
-      window.location.reload()
-    }, 500);
+   
     try {
       fetch('https://64e6020b09e64530d17f6dd0.mockapi.io/Reviews', {
         method: 'POST',
