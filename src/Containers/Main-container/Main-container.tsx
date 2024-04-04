@@ -46,8 +46,8 @@ const StyledContainer = styled.div<ContainersTypes>`
           
         }
         @media(max-width:568px) {
-            max-width:290px;
-            margin:0 auto;
+            width:294px;
+            margin:0 auto;         
         }
     `}
 

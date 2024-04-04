@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite'
 import { scrollTop } from '../../Utils/scrollTop'
 import BasketStore from '../../Store/BasketStore'
 
-const StyledCardWrapper = styled.section`
+const StyledCardWrapper = styled.div`
 
   position: relative;
   display: flex;
@@ -27,7 +27,6 @@ const StyledCardWrapper = styled.section`
     font-family: 'Open Sans', sans-serif;
     color: var(--txt, #BEAE97);
     padding:0 30px; 
-    height:295px;
   }
   .card-title{
     font-size: 16px;
@@ -59,7 +58,6 @@ const StyledCardWrapper = styled.section`
       background: var(--gradient, linear-gradient(118deg, #C09E6C 0%, #FFEBCC 42.62%, #BF936B 100%));
       -webkit-text-fill-color: #36332E;
     }
-
     &:focus{
       background: var(--gradient, linear-gradient(118deg, #C09E6C 0%, #FFEBCC 42.62%, #BF936B 100%));
       -webkit-text-fill-color: #36332E;
@@ -84,7 +82,14 @@ const StyledCardWrapper = styled.section`
     top:-70px;
     padding:12px 72px;
   }
+  @media (max-width:1300px) {
+    .card-inner{
+      height:260px;
+    }
+  }
   @media (max-width: 768px) {
+    height:475px;
+
     .card-inner{
       padding:0 12px 0 12px;
     }
@@ -107,19 +112,21 @@ const StyledCardWrapper = styled.section`
       top:-70px;
       padding:12px 45px;
       width:225px;
-      left:7px;
+      left:-4px;
     }
-    .button-volume{
-      margin:0 0 7px 0;
+    .button-card-volume{
+      margin:0 0 7px 10px !important;
     }
 
   }
   @media (max-width: 568px) {
-    width:276px;
+   
+    width:291px;
     margin:0 auto;
+    height:515px;
 
     .card-inner{
-      padding:0 30px 0 15px;
+      padding:0 30px 0 10px;
     }
     .card-image{
       margin:15px auto 0 auto;
@@ -128,16 +135,17 @@ const StyledCardWrapper = styled.section`
     }
     .card-title{
       top:280px;
+      left:20px;
     }
     .card-volume{
-      margin: 65px 0 15px 0;
+      margin: 65px 5px 10px 10px;
     }
     .price-title{
-      margin:10px 0 0 0;
+      margin:10px 0 0 10px;
     }
     .button-card{
-      top:15px;
-      left:122px;
+      top:7px;
+      left:135px;
     }
   }
 
@@ -179,10 +187,10 @@ export const Card:React.FC<any> = observer(({param}) => {
                     <Link to={`/perfume/singleProduct/${param.id}`}> <h2 className='card-title'>{param.title}</h2> </Link>
                       <p className='card-volume'>Объем мл.</p>
                       <FlexContainer wrap='wrap' justify='space-between'>
-                        <button className='button-volume' name='volume' tabIndex={0} onClick={(event:any) => getDataCard(event)}>{param.volumes[0]}</button>
-                        <button className='button-volume' name='volume' tabIndex={1} onClick={(event:any) => getDataCard(event)}>{param.volumes[1]}</button>
-                        <button className='button-volume' name='volume' tabIndex={2} onClick={(event:any) => getDataCard(event)}>{param.volumes[2]}</button>
-                        <button className='button-volume' name='volume' tabIndex={3} onClick={(event:any) => getDataCard(event)}>{param.volumes[3]}</button>
+                        <button className='button-volume button-card-volume' name='volume' tabIndex={0} onClick={(event:any) => getDataCard(event)}>{param.volumes[0]}</button>
+                        <button className='button-volume button-card-volume' name='volume' tabIndex={1} onClick={(event:any) => getDataCard(event)}>{param.volumes[1]}</button>
+                        <button className='button-volume button-card-volume' name='volume' tabIndex={2} onClick={(event:any) => getDataCard(event)}>{param.volumes[2]}</button>
+                        <button className='button-volume button-card-volume' name='volume' tabIndex={3} onClick={(event:any) => getDataCard(event)}>{param.volumes[3]}</button>
                       </FlexContainer>
                       <FlexContainer justify='space-between'>
                         <p className='price-title'>Стоимость:</p>

@@ -189,7 +189,7 @@ export const SingUp:React.FC = () => {
   return (
     <StyledSingUpUser >
     <h2 className='user-title'>Регистрация</h2>
-    <form method='POST' action="http://localhost:3330">
+    <form method='POST' action="http://localhost:3030">
       <h3 className='user-advantage'>При регистрации вы получите 100 бонусных баллов</h3>
 
       <label htmlFor="singUp-user-email" className='input-wrapper'>

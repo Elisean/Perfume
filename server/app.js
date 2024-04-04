@@ -27,6 +27,7 @@ function sendMail({userMail, userPassword}){
               pass: process.env.PASSWORD
             }
         })
+      
         let mailOptions = {
             from: `тест <${userMail}>` ,
             to: userMail,

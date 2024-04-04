@@ -180,16 +180,14 @@ export const CatalogCard:React.FC<any> = observer(()=>  {
     <>
     <StyledCatalogWrapper>
     <div className={segregationContext.isFilters ? 'filterOpen' : 'filterClosed'}>
-    
-    {
-      isLoading ? [...new Array(12)].map((_, index) => <Skeleton key={index}/>) // До загрузки продуктов покажи скелетон
-                : cards.map((card:any, index:number) => ( // Загрузка продуктов
-               <Card param={card} key={index} /> // Отображение продуктов
-        ) 
-      )
-      
-    }
-  
+      {
+        isLoading ? [...new Array(12)].map((_, index) => <Skeleton key={index}/>) // До загрузки продуктов покажи скелетон
+                  : cards.map((card:any, index:number) => ( // Загрузка продуктов
+                <Card param={card} key={index} /> // Отображение продуктов
+          ) 
+        )
+        
+      }
     </div>
     </StyledCatalogWrapper>
    

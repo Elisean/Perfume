@@ -28,7 +28,7 @@ const SingleProductWrapperStyled = styled.section`
     justify-content:space-between;
     font-family: 'Montserrat', sans-serif;
    
-   
+  
   .card-wrapper{
     margin:25px 0 50px 0;   
   }
@@ -77,11 +77,13 @@ const SingleProductWrapperStyled = styled.section`
     text-transform: uppercase;
     width:40px;
     height:40px;
-    margin:0 20px 40px 0;
   }
   .button-volume:focus{
     background: var(--gradient, linear-gradient(92deg, #C09E6C -1.94%, #FFEBCC 40.99%, #BF936B 98.79%));
     -webkit-text-fill-color: var(--black);
+  }
+  .volume-single-product{
+    margin:0 20px 40px 0;
   }
   .card-step{
     display: flex;
@@ -147,22 +149,22 @@ const SingleProductWrapperStyled = styled.section`
   }
 
   .open-review{
-      margin: 15px 0 20px 0;
-      opacity:1;
-      visibility: visible;
-      display: flex;
-      flex-direction:column;
-      align-items:flex-end;
-      width: 850px;
+    margin: 15px 0 20px 0;
+    opacity:1;
+    visibility: visible;
+    display: flex;
+    flex-direction:column;
+    align-items:flex-end;
+    width: 850px;
   }
   .close-review{
-       margin: -50px 0 0 0;
-       opacity:0;
-       visibility: hidden;   
-       display: flex;
-       flex-direction:column;
-       align-items:flex-end;
-       width: 850px;
+    margin: -50px 0 0 0;
+    opacity:0;
+    visibility: hidden;   
+    display: flex;
+    flex-direction:column;
+    align-items:flex-end;
+    width: 850px;
   }
   .rating-star{
     width:16px;
@@ -189,13 +191,21 @@ const SingleProductWrapperStyled = styled.section`
   .card-button{
     padding:12px 72px;
   }
-  
+ .card-likes-inner{
+    display:grid;
+    grid-template-columns: repeat(4, 305px);
+    grid-template-rows: repeat(1, 510px);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+ }
   @media (max-width:1300px) {
-
     .card-likes-inner{
-      max-width:630px;
-      margin:0 auto;
-    }
+      grid-template-columns: repeat(2, 305px);
+      grid-template-rows: repeat(1, 510px);
+      grid-column-gap: 20px;
+      grid-row-gap: 20px;
+      justify-content:center;
+ }
  
   }
   @media (max-width:880px) {
@@ -256,24 +266,39 @@ const SingleProductWrapperStyled = styled.section`
   }
   .card-inner{
     padding:0 12px 0 5px;
-    height:230px;
+   
     margin:0 0 0 5px;
   }
   .card-title{
-    padding:10px 20px 0 10px;
+    padding:5px 0 0 0;
     font-size:14px;
   }
   .card-volume{
-    margin:55px 0 15px 9px;
+    margin:55px 0 15px 0px;
   }
   .card-likes-title{
     margin:30px 0;
     padding:0;
   }
- 
+  .card-likes-inner{
+    display: grid;
+      grid-template-columns: repeat(2, 240px);
+      grid-template-rows: repeat(1, 470px);
+      grid-column-gap: 20px;
+      grid-row-gap: 20px;
+      justify-content: center;  
+  }
 }
+
 @media (max-width:568px) {
-  
+  .card-likes-inner{
+    display: grid;
+    grid-template-columns: repeat(1, 330px);
+    grid-template-rows: repeat(1, 505px);
+    grid-column-gap: 30px;
+    grid-row-gap: 20px;
+    justify-content: center;  
+  }
   .card-inner-product{
     margin: 30px 20px 0 0;
   }
@@ -281,7 +306,7 @@ const SingleProductWrapperStyled = styled.section`
     margin:15px 0 5px 0;
   }
   .button-volume{
-    margin:0 0px 5px 0;
+    margin:0 5px 5px 0;
   }
   .card-button{
     left:0;
@@ -299,18 +324,16 @@ const SingleProductWrapperStyled = styled.section`
   }
   .card-inner{
     height:250px;
+    margin:0;
   }
   .card-title{
     padding:0;
     font-size:16px;
   }
   .card-volume{
-    margin:65px 0 15px 0;
+    margin:65px 0 15px 15px;
   }
-  .card-image{
-    width:230px;
-    height:230px;
-  }
+ 
 }
  
 `
@@ -509,7 +532,6 @@ export const SingleProduct:React.FC = () =>{
           </div>
           <AsideTitle className='card-likes-title'>Вам так же может понравиться</AsideTitle>
           <div className='card-likes-inner'> 
-          <FlexContainer cardslikesresponse={'true'} justify='space-between'>
               {
               likeProductLoading ? [...new Array(4)].map((_, index) => <Skeleton key={index}/>) 
                         : productLikes.map((card, index) => (   
@@ -517,9 +539,7 @@ export const SingleProduct:React.FC = () =>{
                 )
               )
             }
-              </FlexContainer>
           </div>
-           
       </MainContainer>
     }
         <Footer/>
