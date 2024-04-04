@@ -99,7 +99,7 @@ export const Filters:React.FC<any> = () => {
           notesOpen ? <Notes /> : ''
        } 
            
-        <Button onClick={()=> {resetFilter()}} closefilters={'true'} align='center' justify='space-between' padding='5px 15px'>
+        <Button closefilters={'true'} align='center' justify='space-between' padding='5px 15px'>
             Сбросить 
             <Closed/>
         </Button>

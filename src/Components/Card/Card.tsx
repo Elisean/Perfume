@@ -119,6 +119,7 @@ const StyledCardWrapper = styled.div`
     }
 
   }
+
   @media (max-width: 568px) {
    
     width:291px;

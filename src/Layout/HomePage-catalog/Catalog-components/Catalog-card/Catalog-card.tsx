@@ -11,7 +11,10 @@ import SegregationStore from '../../../../Store/SegregationStore';
 
 const StyledCatalogWrapper = styled.div`
   margin:10px 0 0 0;
-  
+    .filters-empty{
+      font-weight:700;
+      text-align:center;
+    }
    .filterOpen{
       display: grid;
       grid-template-columns: repeat(3, 305px);
@@ -114,8 +117,6 @@ const StyledCatalogWrapper = styled.div`
 
 export const CatalogCard:React.FC<any> = observer(()=>  {
   const segregationContext = useContext(SegregationStore)
- 
-
   const [cards, setCards] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { width, isScreenSm, isScreenMd, isScreenLg, isScreenXl, isScreenXxl } = useResize();
@@ -156,7 +157,8 @@ export const CatalogCard:React.FC<any> = observer(()=>  {
 
   useEffect(() => {  
 
-    segregationContext.segregatioProducts.length === 0 ?
+    segregationContext.currentProduct.length === 0 && segregationContext.segregatioProducts.length === 0 ? // при первой загрузке оба параметра равны нулю 
+
     fetch(
       `https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?page=${currentPage}&limit=${countCards}&`
     )
@@ -167,27 +169,29 @@ export const CatalogCard:React.FC<any> = observer(()=>  {
           
           setTimeout(()=>{
             setIsLoading(false)
+      
           }, 1500)      
      })  :  setCards(segregationContext.currentProduct)
-  }, [segregationContext.currentProduct, currentPage]);
+  }, [segregationContext.currentProduct, currentPage]); // зависимости для перерендера карточек
 
-  console.log()
+ 
   const changeCurrentPage = (number:number) =>{
-    setCurrentPage(number)
-    scrollTop(1900);
+    setCurrentPage(number) // функция для отрисовки пагинации
+    scrollTop(1900); // функция скрола при использовании пагинации
   }
   return (
     <>
     <StyledCatalogWrapper>
     <div className={segregationContext.isFilters ? 'filterOpen' : 'filterClosed'}>
-      {
-        isLoading ? [...new Array(12)].map((_, index) => <Skeleton key={index}/>) // До загрузки продуктов покажи скелетон
-                  : cards.map((card:any, index:number) => ( // Загрузка продуктов
-                <Card param={card} key={index} /> // Отображение продуктов
-          ) 
-        )
-        
-      }
+        {
+        segregationContext.currentProduct.length === 0 && segregationContext.segregatioProducts.length !== 0 ? <div className='filters-empty'>Странно, но ничего нет! Попробуйте изменить критерии поиска</div> : // если продуктов по выбранным кретериям нету в бд то предупреждение
+          isLoading ? [...new Array(12)].map((_, index) => <Skeleton key={index}/>) // До загрузки продуктов покажи скелетон
+                    : cards.map((card:any, index:number) => ( // Загрузка продуктов
+                  <Card param={card} key={index} /> // Отображение продуктов
+            ) 
+          )
+        }
+            
     </div>
     </StyledCatalogWrapper>
    

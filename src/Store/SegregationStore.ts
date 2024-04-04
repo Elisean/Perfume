@@ -13,76 +13,85 @@ class SegregationStore {
     @observable brands: string = '' // глобальная переменная brands
     @observable genders: string = '' // глобальная переменная genders
     @observable notes: string = '' // глобальная переменная notes
-    @observable prices: any = []
+    @observable price: number = 500
 
         constructor(){
             makeAutoObservable(this) 
         }
 
       // сортировка
-         @action priceDescending = (sortMethod: string) => {
+         @action priceDescending = async (sortMethod: string) => {
           
           console.log(sortMethod)
         // сортировка от того что придет в sortMethod
         switch (sortMethod) {
     
           case 'Цена по возрастанию':
-            fetch(
-              'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?sortBy=price'
+           await fetch( 
+              'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?' // получаем все товары
             )
-              .then((res) => res.json())
-              .then((data) => {
-                this.segregatioProducts = data;      
-                
+              .then((res) => res.json()) // переводим ответ в объект json
+              .then((data) => { // получаем объект json
+                this.segregatioProducts = data; // отправляем товары в массив
               });
+           
+              this.segregatioProducts = this.segregatioProducts.sort((a:any, b:any) => a.price - b.price); // отправляем в массив отсортированные товары от меньшего к большему
+              this.currentProduct = this.segregatioProducts // присваиваем отсортированный мсассив
             break;
     
           case 'Цена по убыванию':
-            fetch(
-              'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?sortBy=price&order=desc'
+            await fetch(
+              'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?' // получаем все товары
             )
-              .then((res) => res.json())
-              .then((data) => {
-                data.sort((a:any, b:any) => b.price - a.price); // сортируем данные в обратном порядке
-                this.segregatioProducts = data;      
+              .then((res) => res.json()) // переводим ответ в объект json
+              .then((data) => { // получаем объект json
+                this.segregatioProducts = data; // отправляем товары в массив  
               });
+
+            this.currentProduct = this.segregatioProducts.sort((a:any, b:any) => b.price - a.price); // отправляем в массив отсортированные товары от большего к меньшему
+            this.segregatioProducts = [...this.currentProduct]; // присваиваем к отсортированный массив к массиву что отображается на данный момент 
             break;
     
             case 'Сортировка от последнего':
-            fetch(
-              'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?'
-            )
-              .then((res) => res.json())
-              .then((data) => {
-                data.sort((a:any, b:any) => b.id - a.id); // сортируем данные в обратном порядке
-                this.segregatioProducts = data;      
-              });
+              await fetch(
+                'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?'
+              )
+                .then((res) => res.json()) // получаем все товары
+                .then((data) => { // переводим ответ в объект json
+                  this.segregatioProducts = data; // отправляем товары в массив  
+                });
+              this.currentProduct = this.segregatioProducts.sort((a:any, b:any) => b.id - a.id); // отправляем в массив отсортированные товары в обратном порядке
+              this.segregatioProducts = [...this.currentProduct]; // присваиваем к отсортированный массив к массиву что отображается на данный момент 
             break;
     
             case 'По рейтингу':
-                fetch(
-                  'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?'
-                )
-                  .then((res) => res.json())
-                  .then((data) => {
-                    this.segregatioProducts = data;      
-                  });
+              await fetch(
+                'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?'
+              )
+                .then((res) => res.json()) // получаем все товары
+                .then((data) => { // переводим ответ в объект json
+                  this.segregatioProducts = data; // отправляем товары в массив  
+                });
+                this.currentProduct = this.segregatioProducts.sort((a:any, b:any) => a.title.length - b.title.length); // отправляем в массив отсортированные товары по размеру title
+                this.segregatioProducts = [...this.currentProduct]; // присваиваем к отсортированный массив к массиву что отображается на данный момент 
+          
             break;
     
             case 'По популярности':
-                fetch(
-                    'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?'
-                )
-                .then((res) => res.json())
-                .then((data) => {
-                    this.segregatioProducts = data;      
-                    });
+              await fetch(
+                'https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?'
+              )
+                .then((res) => res.json()) // получаем все товары
+                .then((data) => { // переводим ответ в объект json
+                  this.segregatioProducts = data; // отправляем товары в массив  
+                });
+              this.currentProduct = this.segregatioProducts.sort((a:any, b:any) => a.id - b.id); // стандартное значение 
+              this.segregatioProducts = [...this.currentProduct]; // присваиваем к отсортированный массив к массиву что отображается на данный момент 
             break;
         }
           // сортировка от того что придет в sortMethod
         };
       // сортировка
-
 
       // фильтрация
         @action setFilters = (filters:boolean) =>{
@@ -99,7 +108,7 @@ class SegregationStore {
                     });
             }else{
                 this.segregatioProducts = []
-                window.location.reload()
+                // window.location.reload()
                 
             }
                
@@ -119,8 +128,6 @@ class SegregationStore {
             if(this.notes !== ''){
               this.currentProduct = [...this.currentProduct].filter((product:any) => product.note === this.notes)
             }
-         
-         
         } 
     
         @action getGender = (gender:string) =>{
@@ -166,20 +173,14 @@ class SegregationStore {
             }
         }
 
-        @action getPrice = (price:any) =>{
-          this.prices = price
-             console.log(this.currentProduct)
+        @action getPrice = (price: number) => {
+            this.price = price;
 
-             this.currentProduct = [...this.currentProduct].filter((product:any) => +this.prices[0] <= +product.price)
-             this.currentProduct = [...this.currentProduct].filter((product:any) => +this.prices[1] >= +product.price)
-             if(this.currentProduct.length === 0){
-              this.currentProduct = [...this.segregatioProducts]
-              .filter((product:any) => product.brand === this.brands) // фильтрация товара от бренда
-              .filter((product:any) => product.type === this.genders) // фильтрация товара от гендера
-             }
+            this.currentProduct = [...this.segregatioProducts].sort((a:any, b:any) => a.price - b.price)
+            .filter((product:any) => product.price > +this.price)
         }
       // фильтрация
-      
+   
 }
 // фикс фильтров 
 export default createContext(new SegregationStore()) 

@@ -1,16 +1,31 @@
 import React from "react"
 import ContentLoader from "react-content-loader"
+import styled from "styled-components"
 
+const StyledSkeleton = styled.div`
 
+    @media (max-width:768px) {
+        .skeleton-card{
+            height:410px;
+            width:240px;
+        }        
+    }
+    
+    @media (max-width:568px) {
+        .skeleton-card{
+            height:520px;
+            width:305px;
+        }        
+    }
+`
 export const Skeleton:React.FC = (props:any) => (
-
+<StyledSkeleton>
 <ContentLoader 
     speed={2}
-    width={305}
-    height={517}
     viewBox="0 0 305 517"
     backgroundColor="var(--border)"
     foregroundColor="var(--goldenWhite)"
+    className="skeleton-card"
     {...props}
     >
      <rect x="0" y="17" rx="0" ry="0" width="300" height="2" />
@@ -28,5 +43,8 @@ export const Skeleton:React.FC = (props:any) => (
      <rect x="215" y="418" rx="4" ry="4" width="57" height="22" /> 
      <rect x="28" y="455" rx="4" ry="4" width="245" height="45" />
     </ContentLoader>
+
+</StyledSkeleton>
+
 )
 

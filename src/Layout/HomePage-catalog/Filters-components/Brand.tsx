@@ -89,7 +89,7 @@ const BrandWrapperStyled = styled.section`
     @media (max-width:568px) {
         text-align: left;
         padding:10px 30px;
-        width:88%;
+        width:89%;
     }
 }
 .brand-search-item{
@@ -103,6 +103,9 @@ const BrandWrapperStyled = styled.section`
     padding:10px 30px 10px 10px;
     margin:0 30px 0 20px;
     cursor: pointer;
+    @media (max-width:568px) {
+        margin:0 50px 0 4px;
+    }
 }
 .brand-search-item:hover{
     border-radius: 4px;
@@ -120,6 +123,10 @@ const BrandWrapperStyled = styled.section`
     padding:8px 30px 8px 10px;
     margin:0 30px 0 20px;
     cursor: pointer;
+    @media (max-width:568px) {
+        margin:0 50px 0 10px;
+        padding:8px 0 8px 5px;
+    }
     
 }
 .input-brand{
@@ -127,6 +134,10 @@ const BrandWrapperStyled = styled.section`
     width:260px;
     background-color: #1B1816;
     display:flex;
+    @media (max-width:568px) {
+        margin:6px 2px 0 10px; 
+        width:319px;
+    }
 }
 `
 

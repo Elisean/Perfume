@@ -28,6 +28,7 @@ const StyledWrapper = styled.div`
     justify-content: center;
   }
 
+
   .show{
         position: absolute;
         top:3%;
