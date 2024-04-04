@@ -130,6 +130,11 @@ const StyledSelectInner = styled.div <SelectProps>`
             padding:0 10px;
             margin:0 auto;
         }
+        @media (max-width: 400px) {
+            width: 280px;
+            padding:0 10px;
+            margin:0 auto;
+        }
 
     `}
 

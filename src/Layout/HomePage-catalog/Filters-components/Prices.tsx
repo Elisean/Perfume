@@ -29,6 +29,10 @@ const StyledPriced = styled.div`
       margin: 0 auto 0 auto;
       width: 350px;
     }
+    @media (max-width: 400px) {
+    margin:0 0 0 10px;
+    width: 270px;
+  }
 
     .thumb {
       width: 20px;
@@ -47,6 +51,9 @@ const StyledPriced = styled.div`
     margin: 10px 12px 0 12px;
     @media (max-width: 568px) {
       margin: 20px 0 0 0;
+    }
+    @media (max-width: 400px) {
+      margin: 20px 0 0 10px;
     }
   }
 `;

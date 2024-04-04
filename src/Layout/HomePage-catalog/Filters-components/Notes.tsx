@@ -40,6 +40,9 @@ const StyledNotes = styled.section`
     @media (max-width:568px) {
         margin:0 20px 20px 20px;
     }
+    @media (max-width: 400px) {
+        margin:0 5px 20px 5px;
+    }
 }
 .notes-search-list{
     height:340px;
@@ -120,6 +123,10 @@ const StyledNotes = styled.section`
     @media (max-width:568px) {
         margin:6px 2px 0 10px; 
         width:319px;
+    }
+    @media (max-width:400px) {
+        margin:6px 2px 0 10px; 
+        width:270px;
     }
 }
 

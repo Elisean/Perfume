@@ -138,6 +138,9 @@ const BrandWrapperStyled = styled.section`
         margin:6px 2px 0 10px; 
         width:319px;
     }
+    @media (max-width:400px) {
+        width:280px;
+    }
 }
 `
 

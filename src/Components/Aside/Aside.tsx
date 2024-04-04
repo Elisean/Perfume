@@ -1,8 +1,9 @@
 import React, { ReactNode, useContext } from 'react'
 import { styled } from 'styled-components'
 import { createPortal } from 'react-dom'
-import { ReactComponent as Arrow } from '../../icons/arrow.svg'
-import FiltersStore from '../../Store/SegregationStore'
+
+import SegregationStore from '../../Store/SegregationStore'
+
 
 interface IAside{
   children? : ReactNode
@@ -13,7 +14,6 @@ const AsideStyledWrapper = styled.section`
     min-width:100vw;
     min-height:100vh;
     z-index:5;
-   
 
        /* Внешний класс */
     .before-aside{
@@ -24,7 +24,9 @@ const AsideStyledWrapper = styled.section`
       overflow:scroll;
       margin:90px auto 0 auto;
       padding:0 0 80px 0;
-      
+      @media (max-width:400px) {
+        width:300px;
+      }
     }
     .before-aside-description{
       font-family: 'Montserrat', sans-serif;
@@ -39,6 +41,7 @@ const AsideStyledWrapper = styled.section`
       flex-direction:column;
       justify-content:center;
       align-items:flex-start;
+      z-index:5;
   }
   .show-aside{
     min-width:100%;
@@ -48,9 +51,9 @@ const AsideStyledWrapper = styled.section`
     left:0;
     background-color: #00000075;
     transition:0.5s;
+  
   }
   .hide-aside{
-    min-width:100%;
     min-height:100%;
     position:fixed;
     top:0;
@@ -59,59 +62,25 @@ const AsideStyledWrapper = styled.section`
     transition:0.5s;
   }
 
-  .show-aside-response{
-      position:absolute;
-      top:50%;
-      left:0;
-      color:white;
-      transform:rotate(90deg);
-      @media (max-width:470px) {
-        top:2%;
-        left:43%;
-      }
-      svg{
-        width:45px;
-        height:45px;
-      }
-  }
-   .hide-aside-response{
-      position:absolute;
-      top:50%;
-      left:75px;
-      color:white;
-      transform:rotate(-90deg);
-
-      @media (max-width:470px) {
-        top:2%;
-        left:43%;
-      }
-
-      svg{
-        width:45px;
-        height:45px;
-      }
-  }
-  
 ` 
 
 
 export const Aside:React.FC<IAside> = (props:IAside) => {
 
-  const filtersContext = useContext(FiltersStore);
+  const segregationContext = useContext(SegregationStore);
 
   const body = document.body;
-  filtersContext.isFilters ? body.classList.add('overflow') : body.classList.remove('overflow');
+  segregationContext.isFilters ? body.classList.add('overflow') : body.classList.remove('overflow');
 
 
   return (
     createPortal(
       <AsideStyledWrapper>
-      <div className={filtersContext.isFilters ? 'show-aside' : 'hide-aside'}>
+   
+        <div className={segregationContext.isFilters ? 'show-aside' : 'hide-aside'}>
           {props.children}
-          <div className='aside-inner'>
-            <button type='button' className={filtersContext.isFilters ? 'show-aside-response' : 'hide-aside-response'} onClick={()=> filtersContext.setFilters(!filtersContext.isFilters)}><Arrow/></button>
-          </div>
-      </div>
+        </div>
+
     </AsideStyledWrapper>,document.body
     )
    

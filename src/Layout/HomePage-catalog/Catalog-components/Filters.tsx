@@ -45,15 +45,7 @@ export const Filters:React.FC<any> = () => {
     const [priceOpen, setPriceOpen] = useState(false);
     const [genderOpen, setGenderOpen] = useState(false);
     const [notesOpen, setNotesOpen] = useState(false);
-
     
-    
-    const resetFilter = () =>{
-        window.location.reload();
-    }
-
-
-
   return (
     <FiltersWrapperStyled>
         

@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { FlexContainer } from '../../../Containers/Flex-container/FlexContainer'
 import checked from '../../../icons/checked.svg';
 import { observer } from 'mobx-react';
+import { ReactComponent as Arrow } from '../../../icons/arrow.svg'
 import SegregationStore from '../../../Store/SegregationStore';
 
 
@@ -13,6 +14,9 @@ interface IGender{
 
 
 const StyledGender = styled.div`
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
     .title-input{
       display: flex;
       align-items: center;
@@ -27,6 +31,16 @@ const StyledGender = styled.div`
     }
     .input-check:checked{
         background-image: url(${checked});   
+    }
+    .close-aside{
+      background-color: #2B2825;
+      width:30px;
+      height:25px;
+      transform:rotate(90deg);
+      border: 2px solid var(--red);
+      color:var(--red);
+      margin:0 10px 0 0;
+    
     }
     @media (max-width:568px) {
       .input-check{
@@ -66,6 +80,7 @@ export const Gender:React.FC<IGender> = observer(() => {
               Унисекс
           </label>
         </FlexContainer>
+            <button type='button' className='close-aside'  onClick={()=> segregationContext.setFilters(!segregationContext.isFilters)}><Arrow/></button>        
     </StyledGender>
   )
 }) 

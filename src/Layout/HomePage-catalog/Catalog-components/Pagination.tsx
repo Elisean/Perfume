@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useContext } from 'react'
+import React, { useContext } from 'react'
 import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
 import { useResize } from '../../../Hooks/useResize';
 import { useLocation } from 'react-router-dom';
-import FiltersStore from '../../../Store/SegregationStore';
+import SegregationStore from '../../../Store/SegregationStore';
 
 interface IPagination{
   onChangePage:any
@@ -68,7 +68,7 @@ const StyledPaginate = styled.div`
 `
 
 export const Pagination:React.FC<IPagination> = ({onChangePage}) => {
-    const filtersContext = useContext(FiltersStore);
+    const segregationContext = useContext(SegregationStore);
     const { width, isScreenSm, isScreenMd, isScreenLg, isScreenXl, isScreenXxl } = useResize();
     const location = useLocation();
 
@@ -76,23 +76,23 @@ export const Pagination:React.FC<IPagination> = ({onChangePage}) => {
 
     if(isScreenXxl){
         countPage = 5;
-        if(filtersContext.isFilters){
+        if(segregationContext.isFilters){
             countPage = 7;
         }
     }else if (isScreenXl){
         countPage = 7;
-        if(filtersContext.isFilters){
+        if(segregationContext.isFilters){
             countPage = 10;
         }
     }else if (isScreenLg){
         countPage = 7;
-        if(filtersContext.isFilters){
+        if(segregationContext.isFilters){
             countPage = 10;
         }
 
     }else if (isScreenMd){
         countPage = 7;
-        if(filtersContext.isFilters){
+        if(segregationContext.isFilters){
             countPage = 10;
         }
     }
@@ -101,6 +101,7 @@ export const Pagination:React.FC<IPagination> = ({onChangePage}) => {
     }else if (width >= 100){
         countPage = 20;
     }
+    
 
     if(location.pathname === '/manCatalogPage/'){
         countPage = 2;
@@ -115,7 +116,7 @@ export const Pagination:React.FC<IPagination> = ({onChangePage}) => {
     }
 
     return <StyledPaginate>      
-            <div className={filtersContext.isFilters ? `${'showFilter'}`: ''}>
+            <div className={segregationContext.isFilters ? `${'showFilter'}`: ''}>
             <ReactPaginate
                 className='paginate'
                 breakLabel="..."
@@ -129,3 +130,4 @@ export const Pagination:React.FC<IPagination> = ({onChangePage}) => {
         </StyledPaginate>
     
 }
+// опирайся от закрытости переменной что бы не отрисовывать пагинацию на адаптиве
