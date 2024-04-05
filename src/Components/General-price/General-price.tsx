@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button/Button'
 import { AsideTitle } from '../Aside-title/Aside-title'
+import { useAuthContext } from '../../App/App'
+import { NotAutorizet } from '../Not-autorizet/Not-autorizet'
 
 interface IGeneralPrice{
     count?:number
@@ -42,6 +44,10 @@ const StyledGeneralPrice = styled.div`
     .button-checkout{
         left: 160px;
     }
+    .user-notification{
+        font-size:20px;
+        color:var(--red);
+    }
     @media (max-width:768px) {
         width:540px;
         .button-checkout{
@@ -73,6 +79,28 @@ const StyledGeneralPrice = styled.div`
 `
 
 export const GeneralPrice:React.FC<IGeneralPrice> = ({count, generalPrice}) => {
+
+    const authContext = useContext(useAuthContext)
+    const [isNotAutorized, setIsNotAuthorized] = useState(false)
+    const [emptyPrice, setEmptPrice] = useState(false)
+    
+    useEffect(() =>{
+        if(count === 0){
+            setEmptPrice(true)
+        }else{
+            setEmptPrice(false)
+        }
+    }, [count])
+
+    const changePay = () =>{
+    if(!authContext.useAuth){
+        setIsNotAuthorized(true)
+    }else{
+        setIsNotAuthorized(false)
+    }
+    }
+
+
   return (
     <StyledGeneralPrice>
         <AsideTitle textalign='center' margin='0'>{count ?? 0} товара на сумму: <span>{generalPrice}</span> ₽</AsideTitle>
@@ -95,10 +123,21 @@ export const GeneralPrice:React.FC<IGeneralPrice> = ({count, generalPrice}) => {
                 <p>Кэшбэк</p>
                 <p className='price-cashback'>0 баллов</p>
             </div>
-
+            {
+              emptyPrice ? <div className='user-notification'>Выберите нужный вам товар!</div> : '' 
+            }
+            {
+                isNotAutorized ?  <NotAutorizet>
+                Вы не зарегистрировались! <br />
+                Возможность оплатить товар есть только у 
+                авторизованного пользователя, 
+                перейдите по ссылке для входа или регистрации: <br/>
+                </NotAutorizet> : '' // отображение компонента если пользователь не авторизован
+            }    
+            
             <div className='price-to-pay'>К оплате: <span className='price-pay'>{generalPrice} ₽</span></div>
 
-            <Button padding='12px 40px' top='10px' className='button-checkout'>Оформить заказ</Button>
+            <Button padding='12px 40px' top='10px' className='button-checkout' onClick={()=> changePay()}>Оформить заказ</Button>
            
     </StyledGeneralPrice>
   )

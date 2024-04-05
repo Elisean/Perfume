@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Rating } from '../Rating/Rating'
 import { Input } from '../Input/Input'
 import { MainForm } from '../Main-Form/Main-Form'
 import { Button } from '../Button/Button'
-
+import { useAuthContext } from '../../App/App'
 interface IFormReview{
   id?:number
 }
 
 export const FormReview:React.FC<IFormReview> = (id) => {
+  const authContext = useContext(useAuthContext)
   // шаблон комментария 
     const [reviews, setReviews] = useState<{[key:string]: any}>({
         id:"",
@@ -19,21 +20,20 @@ export const FormReview:React.FC<IFormReview> = (id) => {
     })
 
    // метод отправки комментария на бд
-  const send = () => {
-    try {
-      fetch('https://64e6020b09e64530d17f6dd0.mockapi.io/Reviews', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+  const send = async () => {
+      try {
+        await fetch('https://64e6020b09e64530d17f6dd0.mockapi.io/Reviews', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           
+           body: JSON.stringify(reviews),
+         })
         
-        body: JSON.stringify(reviews),
-      })
-     
-    } catch (error) {
-      console.error('Error', error)
-    }
-    
+       } catch (error) {
+         console.error('Error', error)
+       }
   }
   // получене данных из полей ввода
   const getData = (event : any) =>{

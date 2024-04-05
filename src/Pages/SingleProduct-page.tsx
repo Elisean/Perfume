@@ -18,7 +18,10 @@ import { Card } from '../Components/Card/Card'
 import { Skeleton } from '../Layout/HomePage-catalog/Catalog-components/Catalog-card/Skeleton-catalog-card'
 import BasketStore from '../Store/BasketStore'
 import { nanoid } from 'nanoid'
-
+import { useAuthContext } from '../App/App'
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../Utils/routes'
+import { NotAutorizet } from '../Components/Not-autorizet/Not-autorizet'
 
 
 
@@ -147,8 +150,8 @@ const SingleProductWrapperStyled = styled.section`
     visibility: hidden;
     width:800px;   
   }
-
   .open-review{
+    position:relative;
     margin: 15px 0 20px 0;
     opacity:1;
     visibility: visible;
@@ -158,6 +161,7 @@ const SingleProductWrapperStyled = styled.section`
     width: 850px;
   }
   .close-review{
+    position:relative;
     margin: -50px 0 0 0;
     opacity:0;
     visibility: hidden;   
@@ -191,6 +195,28 @@ const SingleProductWrapperStyled = styled.section`
   .card-button{
     padding:12px 72px;
   }
+  .authorized-hidden{
+    opacity:0;
+    visibility:hidden;
+    width:0;
+    height:0;
+  }
+  .authorized-visible{
+    opacity:1;
+    visibility:visible;
+    width:890px;
+    position:absolute;
+    z-index:8;
+    background-color: var(--bg-color);
+    font-size:18px;
+    text-align:center;
+    top: -135px;
+    left: 0px;
+    padding:30px;
+  
+  }
+ 
+ 
  .card-likes-inner{
     display:grid;
     grid-template-columns: repeat(4, 305px);
@@ -205,9 +231,18 @@ const SingleProductWrapperStyled = styled.section`
       grid-column-gap: 20px;
       grid-row-gap: 20px;
       justify-content:center;
- }
- 
-  }
+    }
+  
+}
+@media (max-width:993px) {
+    .authorized-visible{
+      width:100%;
+      max-width:890px;
+    }
+    .reviews-button{
+      margin:20px 0 0 0;
+    }
+}
   @media (max-width:880px) {
     .open-review{
       width:100%;
@@ -266,7 +301,6 @@ const SingleProductWrapperStyled = styled.section`
   }
   .card-inner{
     padding:0 12px 0 5px;
-   
     margin:0 0 0 5px;
   }
   .card-title{
@@ -287,6 +321,9 @@ const SingleProductWrapperStyled = styled.section`
       grid-column-gap: 20px;
       grid-row-gap: 20px;
       justify-content: center;  
+  }
+  .reviews-button{
+      margin:40px 0 0 0;
   }
 }
 
@@ -333,7 +370,12 @@ const SingleProductWrapperStyled = styled.section`
   .card-volume{
     margin:65px 0 15px 15px;
   }
- 
+  .authorized-visible{
+    font-size:14px;
+    padding:10px 0;
+    width:280px;
+    top:-130px;
+  }
 }
  
 `
@@ -341,6 +383,7 @@ const SingleProductWrapperStyled = styled.section`
 export const SingleProduct:React.FC = () =>{
   const countCharacterForID = 6;
   const basketContext = useContext(BasketStore);
+  const authContext = useContext(useAuthContext)
 
   const [cards, setCards] = useState<{[key:string]: any}>({
     id:"",
@@ -360,7 +403,7 @@ export const SingleProduct:React.FC = () =>{
   const [allReviews, setAllReviews] = useState([]); // получение всех комментариев
   const [productLikes, setProductLikes] = useState([]); // получение избранных продуктов
   const [likeProductLoading, setLikeProductLoading] = useState(true) // предикат для отображения избранных продуктов после загрузки
-
+  const [isNotAuthorized, setIsNotAuthorized] = useState(false) // предикат для отображения ссылки на регистрацию если пользователь не авторизован 
   
 
   // Комментарии к продукту
@@ -430,6 +473,15 @@ export const SingleProduct:React.FC = () =>{
   }, [id]);
    
  
+  const changeReview = () =>{
+    if(!authContext.useAuth){
+      setIsNotAuthorized(true)
+    }else{
+      setOpenModal(true)
+    }
+   
+  }
+
 
   // формирование объекта для корзины товаров
   const getDataCard = (event?:any) =>{
@@ -504,14 +556,25 @@ export const SingleProduct:React.FC = () =>{
                     <p className='modal-bonuses'>За видео-отзыв с фото 200 бонусных баллов</p>
                   </div>
             </div>
-           <FormReview id={product.id} />
-
+           <FormReview id={product.id} /> {/* компонент модального окна для комментария */}
+         
            </Modal>
+           
            <div className={openReviews? 'open-review' : 'close-review'}>
-            <Button padding='12px 0' top='0' left='0' className='reviews-button' onClick={()=> setOpenModal(!openModal)}>Оставить отзыв</Button>
+            {
+              isNotAuthorized ? 
+              <NotAutorizet>
+                  Вы не зарегистрировались! <br />
+                  Возможность оставлять отзывы есть только у 
+                  зарегистрированного пользователя, 
+                  перейдите по ссылке для регистрации:
+              </NotAutorizet> : '' // отображение компонента если пользователь не авторизован
+            }
+              
+            <Button padding='12px 0' top='0' left='0' className='reviews-button' onClick={()=> changeReview()}>Оставить отзыв</Button>
 
             {
-              allReviews.map((review:any, index:number)=>{
+              allReviews.map((review:any, index:number) => {
                 if(product.id === review.cardsId?.id){
                   return(
                     <div className={openReviews ? 'reviews-wrapper' : 'reviews-closed'} key={index}>
