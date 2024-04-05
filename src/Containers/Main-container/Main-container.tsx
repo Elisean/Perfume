@@ -39,7 +39,7 @@ const StyledContainer = styled.div<ContainersTypes>`
         }
     `}
     
-    ${props => props.cardResponse && css`
+    ${props => props.cardresponse && css`
     
         @media(max-width:768px) {
             max-width:568px;

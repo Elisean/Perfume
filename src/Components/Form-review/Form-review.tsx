@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-
 import { Rating } from '../Rating/Rating'
 import { Input } from '../Input/Input'
 import { MainForm } from '../Main-Form/Main-Form'
 import { Button } from '../Button/Button'
 
 interface IFormReview{
-  id:number
+  id?:number
 }
 
 export const FormReview:React.FC<IFormReview> = (id) => {
-
+  // шаблон комментария 
     const [reviews, setReviews] = useState<{[key:string]: any}>({
         id:"",
         userName: "",
@@ -19,10 +18,8 @@ export const FormReview:React.FC<IFormReview> = (id) => {
         message: ""
     })
 
-   
-  const send = (event : any) => {
-    event.preventDefault();
-   
+   // метод отправки комментария на бд
+  const send = () => {
     try {
       fetch('https://64e6020b09e64530d17f6dd0.mockapi.io/Reviews', {
         method: 'POST',
@@ -38,6 +35,7 @@ export const FormReview:React.FC<IFormReview> = (id) => {
     }
     
   }
+  // получене данных из полей ввода
   const getData = (event : any) =>{
     const newReview = {...reviews}
     newReview[event.target.name] = event.target.value
@@ -56,7 +54,7 @@ export const FormReview:React.FC<IFormReview> = (id) => {
                  <Input type='text' name='userName' className='form-input' placeholder='Ваше имя' value={reviews?.userName} onChange={(event : any)=> getData(event)} />
             </label>
             <div className="modal-form-stars">
-                 <Rating name='rating' value={reviews.rating} onChange={(event : any) => getData(event)}/>
+                 <Rating name='rating' value={reviews?.rating} onChange={(event : any) => getData(event)}/>
                  Оцените покупку*
             </div>
           

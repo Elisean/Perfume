@@ -16,8 +16,8 @@ export interface ContainersTypes {
     footerresponse?:string;
     catalogresponse?:string;
     filtersresponse?:string;
-    cardResponse?:boolean;
-    btnsCardResponse?:boolean;
+    cardresponse?:string;
+    btnscardresponse?:string;
     registrationresponse?:string
     cardslikesresponse?:string
     ref?:any;

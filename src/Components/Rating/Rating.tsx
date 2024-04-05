@@ -38,7 +38,6 @@ export const Rating:React.FC<IRating> = ({name, onChange}) => {
     <RatingStarsStyled>
         {[...Array(5)].map((_, index) => {
             const currentRating = index + 1
-            console.log(index)
           return (
             <label>
                 <input

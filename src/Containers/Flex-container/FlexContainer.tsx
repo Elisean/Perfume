@@ -32,13 +32,13 @@ const FlexContainerStyled = styled.div<ContainersTypes>`
         }
     }
     `}
-    ${props => props.cardResponse && css`
+    ${props => props.cardresponse && css`
         @media (max-width:568px) {
            flex-direction: column;
         }
     }
     `}
-    ${props => props.btnsCardResponse && css`
+    ${props => props.btnscardresponse && css`
         @media (max-width:568px) {
            justify-content: space-between;
            width:260px;

@@ -361,18 +361,21 @@ export const SingleProduct:React.FC = () =>{
   const [productLikes, setProductLikes] = useState([]); // получение избранных продуктов
   const [likeProductLoading, setLikeProductLoading] = useState(true) // предикат для отображения избранных продуктов после загрузки
 
+  
 
   // Комментарии к продукту
-  useEffect(() => {
-      fetch(
-        `https://64e6020b09e64530d17f6dd0.mockapi.io/Reviews`
-      )
-      .then((res) => res.json())
-      .then((data) => {
-        setAllReviews(data) // получение всех комментариев в массив
-      }).catch((e)=>{
-        console.log(e)
-     });
+ useEffect(() => {
+
+  fetch(
+      `https://64e6020b09e64530d17f6dd0.mockapi.io/Reviews`
+    )
+    .then((res) => res.json())
+    .then((data) => {
+      setAllReviews(data) // получение всех комментариев в массив
+    }).catch((e)=>{
+      console.log(e)
+   });
+ 
   }, []);
 
   
@@ -447,20 +450,20 @@ export const SingleProduct:React.FC = () =>{
     <SingleProductWrapperStyled>
         <Header/>
     {
-      isLoading ? [...new Array(1)] : <MainContainer cardResponse>
+      isLoading ? [...new Array(1)] : <MainContainer cardresponse={'true'}>
         
       <AsideTitle singleproductresponse={'true'}>Парфюмерия</AsideTitle>
      
         <Breadcrumbs />
           <div className='card-wrapper'>
-          <FlexContainer cardResponse>
+          <FlexContainer cardresponse={'true'}>
               <div className='card-image'>
                   <img src={product.url} alt="img-title" />
               </div>
               <div className='card-inner-product'>
                 <h2 className='card-name'>{product.title}</h2>
                 <p className='card-subtitle'>Объем мл.</p>
-                <FlexContainer wrap='wrap' btnsCardResponse>
+                <FlexContainer wrap='wrap' btnscardresponse={'true'}>
                   <button className='button-volume volume-single-product' tabIndex={0} onClick={(event:any) => getDataCard(event)}>{product.volumes[0]}</button>
                   <button className='button-volume volume-single-product' tabIndex={1} onClick={(event:any) => getDataCard(event)}>{product.volumes[1]}</button>
                   <button className='button-volume volume-single-product' tabIndex={2} onClick={(event:any) => getDataCard(event)}>{product.volumes[2]}</button>
@@ -501,7 +504,7 @@ export const SingleProduct:React.FC = () =>{
                     <p className='modal-bonuses'>За видео-отзыв с фото 200 бонусных баллов</p>
                   </div>
             </div>
-           <FormReview id={product.id}/>
+           <FormReview id={product.id} />
 
            </Modal>
            <div className={openReviews? 'open-review' : 'close-review'}>
@@ -515,9 +518,9 @@ export const SingleProduct:React.FC = () =>{
                       <FlexContainer justify='space-between'>
                         <p className='reviews-username'>{review.userName}</p>
                         <p>
-                               {[...Array(Number(review.rating))].map(() => {
+                               {[...Array(Number(review.rating))].map((_, index) => {
                                 return (
-                                    <Star className='rating-star' color="#FFEBCC" />
+                                    <Star key={index} className='rating-star' color="#FFEBCC" />
                                 )
                               })}
                         </p>

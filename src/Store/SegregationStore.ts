@@ -22,7 +22,6 @@ class SegregationStore {
       // сортировка
          @action priceDescending = async (sortMethod: string) => {
           
-          console.log(sortMethod)
         // сортировка от того что придет в sortMethod
         switch (sortMethod) {
     
