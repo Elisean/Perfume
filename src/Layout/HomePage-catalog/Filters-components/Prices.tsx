@@ -15,6 +15,9 @@ const StyledPriced = styled.div`
     margin: 0 auto 0 auto;
     width: 350px;
   }
+  @media (max-width: 400px) {
+    width: 300px;
+  }
 
   .Slider {
     width: 280px;

@@ -32,17 +32,22 @@ const StyledGender = styled.div`
     .input-check:checked{
         background-image: url(${checked});   
     }
+  
     .close-aside{
-      background-color: #2B2825;
-      width:30px;
-      height:25px;
-      transform:rotate(90deg);
-      border: 2px solid var(--red);
-      color:var(--red);
-      margin:0 10px 0 0;
-    
+      display:none;
     }
+
     @media (max-width:568px) {
+      .close-aside{
+        display:block;
+        background-color: #2B2825;
+        width:30px;
+        height:25px;
+        transform:rotate(90deg);
+        border: 2px solid var(--red);
+        color:var(--red);
+        margin:0 10px 0 0;
+    }
       .input-check{
         margin: 10px 10px 10px 10px;
       }

@@ -107,9 +107,7 @@ class SegregationStore {
                       this.currentProduct = [...this.segregatioProducts]
                     });
             }else{
-                this.segregatioProducts = []
-                // window.location.reload()
-                
+                this.segregatioProducts = []            
             }
                
         }
@@ -118,7 +116,6 @@ class SegregationStore {
             this.brands = brand // присваивай к глобальной переменной локальную переменную
             if(this.segregatioProducts.length !== 0){ // если в массиве что то есть то запускай фильтрацию
                 this.currentProduct = [...this.segregatioProducts].filter((product:any) => product.brand === this.brands) // фильтрация товара от бренда
-             
             }else{
                 this.segregatioProducts = [] // если массив пустой то присваивай пустой массив
             }
@@ -151,6 +148,10 @@ class SegregationStore {
             this.currentCategory = [...this.currentProduct].filter((product:any) => product.type === this.genders)
             this.currentProduct = [...this.currentCategory]
           }
+          if(this.brands !== '' && this.notes !== '' && this.price !== 500){
+            this.currentCategory = [...this.currentProduct].filter((product:any) => product.type === this.genders)
+            this.currentProduct = [...this.currentCategory]
+          }
         }
         @action getNotes = (notes:string) =>{
             this.notes = notes // присваивай к глобальной переменной локальную переменную
@@ -161,7 +162,6 @@ class SegregationStore {
             }else{
               this.segregatioProducts = [] // если массив пустой то присваивай пустой массив
             }
-
             if(this.brands !== ''){
               this.currentProduct = [...this.currentProduct].filter((product:any) => product.brand === this.brands)
             }
@@ -171,13 +171,34 @@ class SegregationStore {
             if(this.genders !== '' && this.brands !== ''){
               this.currentProduct = [...this.currentProduct].filter((product:any) => product.type === this.genders)
             }
+            if(this.genders !== '' && this.brands !== '' && this.price !== 500){
+              this.currentProduct = [...this.currentProduct].filter((product:any) => product.type === this.genders)
+            }
         }
 
         @action getPrice = (price: number) => {
             this.price = price;
-
-            this.currentProduct = [...this.segregatioProducts].sort((a:any, b:any) => a.price - b.price)
-            .filter((product:any) => product.price > +this.price)
+            if(this.segregatioProducts.length !== 0){
+              this.currentProduct = [...this.segregatioProducts].sort((a:any, b:any) => a.price - b.price)
+              .filter((product:any) => product.price > +this.price)
+            }else{
+              this.segregatioProducts = [] // если массив пустой то присваивай пустой массив
+            }
+            if(this.brands !== ''){
+              this.currentProduct = [...this.currentProduct].filter((product:any) => product.brand === this.brands)
+            }
+            if(this.genders !== ''){
+              this.currentProduct = [...this.currentProduct].filter((product:any) => product.type === this.genders)
+            }
+            if(this.notes !== ''){
+              this.currentProduct = [...this.currentProduct].filter((product:any) => product.note === this.notes)
+            }
+            if(this.brands !== '' && this.notes !== ''){
+              this.currentProduct = [...this.currentProduct].filter((product:any) => product.price === this.price)
+            }
+            if(this.genders !== '' && this.brands !== ''){
+              this.currentProduct = [...this.currentProduct].filter((product:any) => product.price === this.price)
+            }
         }
       // фильтрация
    
