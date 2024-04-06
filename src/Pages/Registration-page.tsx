@@ -23,11 +23,7 @@ const StyledUserPageWrapper = styled.section`
 `
 
 export const RegistationPage = () => {
-
-
   return (
-        
-
     <StyledUserPageWrapper>
         <Header/>
           <MainContainer>

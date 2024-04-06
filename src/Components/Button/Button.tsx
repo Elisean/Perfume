@@ -54,6 +54,7 @@ const StyledButton = styled.button<IButton>`
     &:hover{
       background: var(--gradient, linear-gradient(92deg, #C09E6C -1.94%, #FFEBCC 40.99%, #BF936B 98.79%));
       -webkit-text-fill-color:var(--black);
+      color:var(--black);
     }
     
 

@@ -55,10 +55,8 @@ const StyledWrapperAsidePanel = styled.section`
 export const AsidePanel:React.FC = () => {
 
     const exit = () =>{
-    
         localStorage.removeItem('userToken')
         window.location.reload()
-        
     }
 
   return (

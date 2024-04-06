@@ -29,7 +29,7 @@ function sendMail({userMail, userPassword}){
         })
       
         let mailOptions = {
-            from: `тест <${userMail}>` ,
+            from: `Perfume <${userMail}>` ,
             to: userMail,
             subject: `Perfume пароль для авторизации`,
             text: `Ваш пароль для входа в линый кабинет ${userPassword}`

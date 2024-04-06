@@ -55,27 +55,25 @@ export const LocationPanel:React.FC = () => {
       <MainContainer>
         <AsideTitle>Мой аккаунт</AsideTitle>  
         <Breadcrumbs/>
-
-      <FlexContainer>
-        <AsidePanel/> 
-        <div className='locationPanel-inner'>
-            <AsideTitle>Адрес</AsideTitle>
-            {
-              usersNames ? <LocationUserData/> : (
-                <>
-                <p className={openEditAddress ? "location-description-none" : "location-description"}>Следующие адреса будут использованы при оформлении заказов по-умолчанию</p>
-                <h2 className='add-location'>Платёжный адрес:</h2>
-                <button className={openEditAddress ? "location-add-address-none" : "location-add-address"} onClick={()=> setOpenEditAddress(!openEditAddress)}>Добавить</button>
-                </> 
-              ) 
-            }
-            {
-              openEditAddress && <LocationForm/>
-            }
-         
-        </div>
-      </FlexContainer>
-
+        <FlexContainer>
+          <AsidePanel/> 
+          <div className='locationPanel-inner'>
+              <AsideTitle>Адрес</AsideTitle>
+              {
+                usersNames ? <LocationUserData/> : (
+                  <>
+                  <p className={openEditAddress ? "location-description-none" : "location-description"}>Следующие адреса будут использованы при оформлении заказов по-умолчанию</p>
+                  <h2 className='add-location'>Платёжный адрес:</h2>
+                  <button className={openEditAddress ? "location-add-address-none" : "location-add-address"} onClick={()=> setOpenEditAddress(!openEditAddress)}>Добавить</button>
+                  </> 
+                ) 
+              }
+              {
+                openEditAddress && <LocationForm/>
+              }
+          
+          </div>
+        </FlexContainer>
       </MainContainer>
       <Footer/>  
     </StyledLocationPanelWrapper>

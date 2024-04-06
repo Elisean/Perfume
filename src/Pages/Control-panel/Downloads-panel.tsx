@@ -31,30 +31,25 @@ const StyledDownLoadsPanelWrapper = styled.section`
 
 
 export const DownloadsPanel:React.FC = () => {
-
   return (
-
-        <StyledDownLoadsPanelWrapper>
-    <Header/>
-      <MainContainer>
-        <AsideTitle>Мой аккаунт</AsideTitle>  
-        <Breadcrumbs/>
-
-      <FlexContainer>
-        <AsidePanel/> 
-        <div className='downloadsPanel-inner'>
-            <AsideTitle>Загрузки</AsideTitle>
-            <p className='no-downloads'>
-              <NoDownloadsIcon/>
-              Доступных загрузок нет
-            </p>
-        </div>
-      </FlexContainer>
-
-      </MainContainer>
+    <StyledDownLoadsPanelWrapper>
+      <Header/>
+        <MainContainer>
+          <AsideTitle>Мой аккаунт</AsideTitle>  
+          <Breadcrumbs/>
+            <FlexContainer>
+              <AsidePanel/> 
+              <div className='downloadsPanel-inner'>
+                  <AsideTitle>Загрузки</AsideTitle>
+                  <p className='no-downloads'>
+                    <NoDownloadsIcon/>
+                    Доступных загрузок нет
+                  </p>
+              </div>
+            </FlexContainer>
+        </MainContainer>
       <Footer/>  
     </StyledDownLoadsPanelWrapper>
-
   )
 }
 

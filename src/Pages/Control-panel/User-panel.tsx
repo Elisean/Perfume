@@ -6,11 +6,12 @@ import { AsideTitle } from '../../Components/Aside-title/Aside-title'
 import { Breadcrumbs } from '../../Components/Breadcrumbs/Breadcrumbs'
 import { FlexContainer } from '../../Containers/Flex-container/FlexContainer'
 import { AsidePanel } from '../../Components/Aside-panel/AsidePanel'
-import styled from 'styled-components'
 import { useForm } from '../../Hooks/useForm'
 import { Input } from '../../Components/Input/Input'
 import { MainForm } from '../../Components/Main-Form/Main-Form'
 import { Button } from '../../Components/Button/Button'
+import styled from 'styled-components'
+
 
 
 const StyledUserPanelWrapper = styled.section`
@@ -35,7 +36,6 @@ const StyledUserPanelWrapper = styled.section`
 `
 
 export const UserPanel:React.FC = () => {
-
 
 // формирование полей для валидации
   const {formData, errors, handleChange} : {formData : any; errors : any; handleChange : any} = useForm({

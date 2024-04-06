@@ -19,8 +19,6 @@ import { Skeleton } from '../Layout/HomePage-catalog/Catalog-components/Catalog-
 import BasketStore from '../Store/BasketStore'
 import { nanoid } from 'nanoid'
 import { useAuthContext } from '../App/App'
-import { Link } from 'react-router-dom'
-import { ROUTES } from '../Utils/routes'
 import { NotAutorizet } from '../Components/Not-autorizet/Not-autorizet'
 
 
@@ -404,7 +402,7 @@ export const SingleProduct:React.FC = () =>{
   const [productLikes, setProductLikes] = useState([]); // получение избранных продуктов
   const [likeProductLoading, setLikeProductLoading] = useState(true) // предикат для отображения избранных продуктов после загрузки
   const [isNotAuthorized, setIsNotAuthorized] = useState(false) // предикат для отображения ссылки на регистрацию если пользователь не авторизован 
-  
+
 
   // Комментарии к продукту
  useEffect(() => {
@@ -440,7 +438,7 @@ export const SingleProduct:React.FC = () =>{
   // степпер на увеличение продукта
   const increase = () =>{
     setCount(count + 1)
-    
+  
     if(count === 100){
       setCount(count = 100)
     }
@@ -457,6 +455,7 @@ export const SingleProduct:React.FC = () =>{
     .then((data) => {
       setIsLoading(false) // предикат для отображения продуктов после загрузки
       setProduct(data) // получение товаров в массив 
+ 
      })
       // подгрузка отдельного товара
 

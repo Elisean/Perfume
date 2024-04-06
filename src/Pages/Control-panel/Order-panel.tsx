@@ -37,20 +37,17 @@ export const OrderPanel = () => {
         <AsideTitle>Мой аккаунт</AsideTitle>  
         <Breadcrumbs/>
 
-      <FlexContainer>
-        <AsidePanel/> 
-        <div className='orderPanel-inner'>
-            <AsideTitle>Заказы</AsideTitle>
-            <p className='no-orders'>
-              <NoOrdersIcon/>
-              Вы пока не совершали заказов :(
-            </p>
-        </div>
-     
-      
-      </FlexContainer>
+          <FlexContainer>
+            <AsidePanel/> 
+            <div className='orderPanel-inner'>
+                <AsideTitle>Заказы</AsideTitle>
+                <p className='no-orders'>
+                  <NoOrdersIcon/>
+                  Вы пока не совершали заказов :(
+                </p>
+            </div>
+          </FlexContainer>
 
-    
       </MainContainer>
       <Footer/>  
     </StyledOrderPanelWrapper>

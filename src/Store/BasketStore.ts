@@ -6,8 +6,6 @@ class BasketStore {
 
     @observable cardsData = JSON.parse(localStorage.getItem("basketProduct") || '[]')  
     
-  
-   
     constructor(){
         makeAutoObservable(this)
     }
@@ -47,15 +45,15 @@ class BasketStore {
         const priceCardsData = JSON.parse(localStorage.getItem("basketProduct") || '[]') // Неизменяемый price
 
         const findObject = this.cardsData.find((obj:{ volume:number, id:string, price:number })=> obj.id === id) // поиск нужного элемента
-        findObject.volume++; // функция добавления
-        if(findObject.volume >= 100){ // если больше 100 присвой к переменной 100
-            findObject.volume = 100
-        }
 
         const priceFind = priceCardsData.find((obj:{ volume:number, id:string, price:number })=> obj.id === id) // изменяемый price
         const newNum = Number.parseInt(findObject.price) + Number.parseInt(priceFind.price);  // сложение  
         findObject.price = newNum // присвоение нового значения
-     
+        findObject.volume++; // функция добавления
+        if(findObject.volume >= 100){ // если больше 100 присвой к переменной 100 а к общей цене присвой неизменяемую цену умноженную на 100
+            findObject.volume = 100
+            findObject.price = Number.parseInt(priceFind.price) * 100 
+        }
     }   
 }
 
