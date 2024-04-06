@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as Panel } from '../../icons/panel.svg' 
 import { ReactComponent as  Bonuses} from '../../icons/bonuses-icon.svg' 
@@ -8,7 +8,8 @@ import { ReactComponent as  LocationPanel} from '../../icons/location-panel.svg'
 import { ReactComponent as  UserPanel} from '../../icons/user-panel.svg'
 import { ReactComponent as  Exit} from '../../icons/exit.svg'
 import { NavLink } from 'react-router-dom'
-import { useAuthContext } from '../../App/App'
+import { ROUTES } from '../../Utils/routes'
+
 
 
 
@@ -53,29 +54,27 @@ const StyledWrapperAsidePanel = styled.section`
 
 export const AsidePanel:React.FC = () => {
 
-    const authContext = useContext(useAuthContext)
-
     const exit = () =>{
-        authContext.setUseAuth(false)
-        localStorage.setItem("userAuth", JSON.stringify(authContext.useAuth = false)) 
+    
+        localStorage.removeItem('userToken')
+        window.location.reload()
+        
     }
-  
-  
+
   return (
     <StyledWrapperAsidePanel>
       <nav className='aside-nav'>
             <ul className='nav-list'>
-                <NavLink state='Панель управления' to='/userPage' className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Панель управления <Panel/></NavLink>
-                <NavLink state='Бонусы' to='/BonusesPanel/' className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Бонусы <Bonuses/></NavLink>
-                <NavLink state='Заказы' to='/OrderPanel' className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Заказы <Order/></NavLink>
-                <NavLink state='Загрузки' to='/DownloadsPanel' className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Загрузки <Downloads/></NavLink>
-                <NavLink state='Адрес' to='/LocationPanel' className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Адрес <LocationPanel/></NavLink>
-                <NavLink state='Детали профиля' to='/UserPanel' className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Детали профиля <UserPanel/></NavLink>
+                <NavLink state='Панель управления' to={ROUTES.USERPAGE} className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Панель управления <Panel/></NavLink>
+                <NavLink state='Бонусы' to={ROUTES.BONUSESPANEL} className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Бонусы <Bonuses/></NavLink>
+                <NavLink state='Заказы' to={ROUTES.ORDERPANEL} className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Заказы <Order/></NavLink>
+                <NavLink state='Загрузки' to={ROUTES.DOWNLOADSPANEL} className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Загрузки <Downloads/></NavLink>
+                <NavLink state='Адрес' to={ROUTES.LOCATIONPANEL} className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Адрес <LocationPanel/></NavLink>
+                <NavLink state='Детали профиля' to={ROUTES.USERPANEL} className={({isActive}) => isActive ? 'nav-item-active' : 'nav-item'}>Детали профиля <UserPanel/></NavLink>
                 <NavLink to='/registration' className='nav-item' onClick={()=> exit()}>Выход <Exit/></NavLink>
             </ul>
       </nav>
     </StyledWrapperAsidePanel>
   )
 }
-
 
