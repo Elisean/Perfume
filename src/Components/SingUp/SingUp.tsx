@@ -6,9 +6,6 @@ import { useForm } from '../../Hooks/useForm'
 import styled from 'styled-components'
 import { nanoid } from 'nanoid'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { ROUTES } from '../../Utils/routes'
-
 
 
 const StyledSingUpUser = styled.section`
@@ -121,6 +118,8 @@ const StyledSingUpUser = styled.section`
     }
 `
 
+
+
 export const SingUp:React.FC = () => {
 
   const {formData, errors, handleChange} : {formData : any; errors : any; handleChange : any} = useForm({
@@ -131,6 +130,7 @@ export const SingUp:React.FC = () => {
       userMail:"",
       userPassword:"",
       userID:"",
+      userToken:""
   })
   const [isRegestration, setIsRegestration] = useState(false); // оповещение после того как пользователь зарегестрировался
   
@@ -139,6 +139,7 @@ export const SingUp:React.FC = () => {
 
   const countPassword = 10;
   const countID = 6;
+  const countSymbolsUserToken = 10
 
   const getUserEmail = (event?:any) =>{
 
@@ -148,6 +149,7 @@ export const SingUp:React.FC = () => {
     newEmail.userMail = formData.email;
     newEmail.userPassword = nanoid(countPassword);
     newEmail.userID = nanoid(countID);
+    newEmail.userToken = nanoid(countSymbolsUserToken)
 
     // отправка данных на почту пользоователя
       axios 
@@ -238,5 +240,3 @@ export const SingUp:React.FC = () => {
   </StyledSingUpUser>
   )
 }
-
-

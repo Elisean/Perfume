@@ -75,7 +75,7 @@ export const SingIn:React.FC = observer(() => {
   const SingIn = () =>{
     for(let key of authUser){
       if(formData.email === key.userMail && formData.password === key.userPassword){
-        localStorage.setItem("userAuth", JSON.stringify(authContext.useAuth = true)) 
+        localStorage.setItem("userToken", JSON.stringify(key.userToken)) 
         authContext.setUseAuth(true)
         navigate(ROUTES.USERPAGE)
       }

@@ -77,4 +77,3 @@ export const AsidePanel:React.FC = () => {
     </StyledWrapperAsidePanel>
   )
 }
-
