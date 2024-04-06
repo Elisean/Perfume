@@ -231,7 +231,7 @@ export const SingUp:React.FC = () => {
           <h1 className="notification-title">Вы успешно зарегистрированы!</h1>
           <h2 className='notification-subtitle'>На ваш Email адрес отправлен пароль для входа в личный кабинет</h2>
           
-          <Button padding='12px 20px'> <Link to={ROUTES.HOME}>Перейти к покупкам</Link></Button>
+          <Button padding='12px 20px' onClick={()=> window.location.reload()}>Войдите в аккаунт</Button>
         </div>
       </div>
     }

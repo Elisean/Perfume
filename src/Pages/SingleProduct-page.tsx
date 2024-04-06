@@ -440,6 +440,7 @@ export const SingleProduct:React.FC = () =>{
   // степпер на увеличение продукта
   const increase = () =>{
     setCount(count + 1)
+    
     if(count === 100){
       setCount(count = 100)
     }
@@ -545,7 +546,7 @@ export const SingleProduct:React.FC = () =>{
             Отзывы
            <Chevron/>
           </MainSelect>
-           <Modal isOpen={openModal} onClose={toggleModal} modalTitle={product.title} >
+           <Modal isOpen={openModal} onClose={toggleModal} modalTitle={product.title}>
            <div className='modal-bonuses-wrapper'>
                   <div className='modal-bonuses-icon'>
                     <Bonuses/>

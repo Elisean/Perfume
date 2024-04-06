@@ -5,7 +5,7 @@ import { BonusesPage } from "../Pages/Bonuses-page";
 import { AboutUsPage } from "../Pages/AboutUs-page";
 import { DocumentationPage } from "../Pages/Documentation-page";
 import { Route, Routes } from "react-router-dom";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { NotFoundPage } from "../Pages/NotFoundPage";
 import { ManCatalogPage } from "../Pages/ManCatalog-page";
 import { WomenCatalogPage } from "../Pages/WomenCatalog-page";
@@ -23,10 +23,12 @@ import { UserPanel } from "../Pages/Control-panel/User-panel";
 
 export const useAuthContext = createContext<any>('');
 
-export const App:React.FC = () => {
-  const [useAuth, setUseAuth] = useState(false);
+const isAuthenticated = () => !localStorage.getItem('userAuth');
 
-  
+export const App = () => {
+  const [useAuth, setUseAuth] = useState(isAuthenticated );
+
+
 
   return (
     <>
@@ -51,6 +53,7 @@ export const App:React.FC = () => {
                   <Route element={<NotFoundPage/>} path={ROUTES.NOTFOUNDPAGE} />
                   <Route element={<RegistationPage/>} path={ROUTES.REGISTRATION} />
               </Routes>  
+  
             </useAuthContext.Provider>
       </div>
     </>

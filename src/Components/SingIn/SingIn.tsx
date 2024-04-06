@@ -78,9 +78,6 @@ export const SingIn:React.FC = observer(() => {
         localStorage.setItem("userAuth", JSON.stringify(authContext.useAuth = true)) 
         authContext.setUseAuth(true)
         navigate(ROUTES.USERPAGE)
-        
-      }else{
-        return false
       }
     }
   }

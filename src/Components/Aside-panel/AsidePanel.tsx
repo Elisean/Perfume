@@ -57,8 +57,9 @@ export const AsidePanel:React.FC = () => {
 
     const exit = () =>{
         authContext.setUseAuth(false)
+        localStorage.setItem("userAuth", JSON.stringify(authContext.useAuth = false)) 
     }
-    console.log(authContext)
+  
   
   return (
     <StyledWrapperAsidePanel>
