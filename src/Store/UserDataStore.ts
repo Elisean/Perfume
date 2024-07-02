@@ -8,25 +8,26 @@ export class UserData{
     @observable countries:[] = [] // массив стран
     @observable isDisabled:boolean = true // предикат на разблокирование input
     @observable isOpenChange:boolean = false // предикат на открытие select у input
-    @observable countryId = [] // id конкретной страны
+    @observable countryId = [] // id отдельного страны
 
     @observable areaLetter:string = "" // отдельный символ в строке 
     @observable areas:[] = [] // массив областей
     @observable isOpenChangeArea:boolean = false // предикат на открытие select у input
-    @observable areaId = [] // id конкретной области
+    @observable areaId = [] // id отдельного области
 
     @observable cityLetter:string = "" // отдельный символ в строке 
-    @observable cities:[] = [] // массив областей
+    @observable cities:[] = [] // массив городов
     @observable isOpenChangeCity:boolean = false // предикат на открытие select у input
-    @observable cityId = [] // id конкретной области
+    @observable cityId = [] // id отдельного города
 
     
     constructor(){
         makeAutoObservable(this)
     }
     
-    //  получение буквы страны пользователя
+      
     @action openAllCountries = (letterCountry:any) => {
+            //  получение буквы страны пользователя
         this.countryletter = letterCountry
         fetch(`https://api.hh.ru/areas/countries/`)
              .then((res) => res.json())
@@ -43,6 +44,7 @@ export class UserData{
         });
     
     }
+    // функция получения отдлельного id страны
     @action insertUserCountry = (country:any) =>{
         this.countryletter = country
         this.isOpenChange = false    
@@ -54,6 +56,7 @@ export class UserData{
             this.countryId = selectedCountry.id
         })
     }
+    // функция фильтрации массива стран по id страны
     @action openAllAreas = (lettersArea:any) =>{
         this.areaLetter = lettersArea
         fetch(`https://api.hh.ru/areas/${this.countryId}/`)
@@ -66,12 +69,10 @@ export class UserData{
                     area.name.toLowerCase().includes(lettersArea)
                 )  
             })
-            
             this.isOpenChangeArea = true   
         });
-        
-
     }
+    // функция получения отдлельного id области
     @action insertUserArea = (area:any) =>{
         this.areaLetter = area
         this.isOpenChangeArea = false 
@@ -83,6 +84,7 @@ export class UserData{
         })
 
     }
+    // функция фильтрации массива областей по id области
     @action openAllCities = (lettersCity:any) =>{
         this.cityLetter = lettersCity
      
@@ -101,6 +103,7 @@ export class UserData{
         });
     
     }
+    // получение отдельного города
     @action insertUserCity = (city:any) =>{
         this.cityLetter = city
         this.isOpenChangeCity = false 

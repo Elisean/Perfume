@@ -426,24 +426,25 @@ export const SingleProduct:React.FC = () =>{
     setOpenModal((showModal) => !showModal)
   }
   // открытие закрытие окна для отправки комментариев
-  // степпер на уменьшение продукта
+  // степпер на уменьшение количества продукта
   const decrease = () =>{
       if(count <= 1){
         setCount(count = 1)
+      
       }else{
         setCount(count - 1)
       }  
   }
-   // степпер на уменьшение продукта
-  // степпер на увеличение продукта
+   
+  // степпер на количества увеличение продукта
   const increase = () =>{
+
     setCount(count + 1)
-  
     if(count === 100){
       setCount(count = 100)
     }
   }
-   // степпер на увеличение продукта
+ 
  
   // подгрузка товаров
   useEffect(() => {
@@ -457,8 +458,7 @@ export const SingleProduct:React.FC = () =>{
       setProduct(data) // получение товаров в массив 
  
      })
-      // подгрузка отдельного товара
-
+   
       // подгрузка избранных товаров
       fetch(
         `https://64e6020b09e64530d17f6dd0.mockapi.io/Flavors?&filter=${'productLikes'}`
@@ -468,8 +468,7 @@ export const SingleProduct:React.FC = () =>{
         setLikeProductLoading(false) // предикат для отображения продуктов после загрузки
         setProductLikes(data) // получение товаров в массив 
       })
-      // подгрузка избранных товаров
-
+     
   }, [id]);
    
  
